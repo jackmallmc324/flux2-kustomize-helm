@@ -1,0 +1,27 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: efk
+  namespace: efk
+spec:
+  releaseName: efk
+  chart:
+    spec:
+      chart: apm-server
+      sourceRef:
+        kind: HelmRepository
+        name: apm-server
+  interval: 1m
+  install:
+    remediation:
+      retries: 3
+  # Default values
+  # https://github.com/stefanprodan/podinfo/blob/master/charts/podinfo/values.yaml
+  values:
+    redis:
+      enabled: true
+      repository: public.ecr.aws/docker/library/redis
+      tag: 7.0.6
+    ingress:
+      enabled: true
+      className: nginx
