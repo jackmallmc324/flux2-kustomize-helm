@@ -8,3 +8,6 @@ patches:
   - path: podinfo-values.yaml
     target:
       kind: HelmRelease
+  - path: efk-values.yaml
+    target:
+      kind: HelmRelease
